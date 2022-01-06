@@ -6,12 +6,12 @@
   "author": "alpaca",
   "license": "GPL-3.0-or-later",
   "scripts": {
-    "remove:Vault": "graph remove huskyfarm/Vault --node https://bsc.huski.finance:8020/",
+    "remove:Vault": "graph remove huskyfarm/Vault --node https://localhost:8020/",
     "codegen": "graph codegen subgraph.yaml",
     "build": "graph build subgraph.yaml",
-    "create": "graph create --node https://bsc.huski.finance:8020 huskyfarm/Vault",
+    "create": "graph create --node https://localhost:8020 huskyfarm/Vault",
 
-    "deploy": "graph deploy --product hosted-service --node https://bsc.huski.finance:8020 --ipfs https://bsc.huski.finance:5001 huskyfarm/Vault subgraph.yaml"
+    "deploy": "graph deploy --product hosted-service --node https://localhost:8020 --ipfs https://localhost:5001 huskyfarm/Vault subgraph.yaml"
   }
 }
 

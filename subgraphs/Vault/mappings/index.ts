@@ -3,7 +3,6 @@ import {Address, BigInt, ethereum} from "@graphprotocol/graph-ts";
 import {
     KillData,
     LendData,
-    LendDayData,
     PositionData,
     PriceUpdateData, TotalPositionValue,
     VaultData,

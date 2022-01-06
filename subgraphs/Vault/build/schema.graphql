@@ -56,16 +56,6 @@ type LendData @entity{
   baseAmount : BigInt !
 }
 
-type LendDayData @entity{
-  id : ID!
-
-  date: BigInt
-
-  dailyValue: BigInt
-
-  dailyBaseAmount: BigInt
-}
-
 type KillData @entity{
   id : ID!
 
@@ -105,8 +95,6 @@ type PositionData @entity{
 
   owner : String!
 
-#  time: BigInt!
-
   lpToken : BigInt!
 
   debtVal : BigInt!
@@ -115,19 +103,6 @@ type PositionData @entity{
 type TotalPositionValue @entity{
   id : ID!
 
-#  time : BigInt!
-
   totalPositionValue : BigInt!
 }
-#type ValueLock @entity{
-#  id : ID!
-#
-#  block: BigInt
-#
-#  transactionHash: Bytes
-#
-#  date: BigInt!
-#
-#  dailyValueLock : BigInt
-#
-#}
+

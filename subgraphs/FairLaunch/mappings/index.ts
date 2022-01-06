@@ -134,14 +134,3 @@ export function fetchPoolInfo(address:Address,pid:BigInt):void{
     }
 
 }
-
-
-// 在非全节点,测试Call方法报错，不确定出错原因
-// export function handleDepositCall(call: DepositCall): void{
-//     let id = call.transaction.hash.toHex()
-//     let depositCallData = new DepositCallData(id)
-//     depositCallData.for = call.inputs._for
-//     depositCallData.pid = call.inputs._pid
-//     depositCallData.amount = call.inputs._amount
-//     depositCallData.save()
-// }
