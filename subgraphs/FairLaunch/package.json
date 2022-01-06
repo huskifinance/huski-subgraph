@@ -1,0 +1,15 @@
+{
+  "name": "fairlaunch",
+  "description": "husky farm Subgraph",
+  "version": "1.0.0",
+  "repository": "git@github.com:alpaca-finance/bsc-alpaca-contract.git",
+  "author": "alpaca",
+  "license": "GPL-3.0-or-later",
+  "scripts": {
+    "remove:exchange": "graph remove huskyfarm/fairLaunch --node https://bsc.huski.finance:8020/",
+    "codegen": "graph codegen subgraph.yaml",
+    "build": "graph build subgraph.yaml",
+    "create": "graph create --node https://bsc.huski.finance:8020 huskyfarm/fairLaunch",
+    "deploy": "graph deploy --product hosted-service --node https://bsc.huski.finance:8020 --ipfs https://bsc.huski.finance:5001 huskyfarm/fairLaunch subgraph.yaml"
+  }
+}

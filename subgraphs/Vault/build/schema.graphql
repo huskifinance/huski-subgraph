@@ -1,0 +1,133 @@
+type VaultDayData @entity{
+  id: ID!
+
+  baseTokenAddress:String!
+
+  date: BigInt
+
+  dailyLoan: BigInt
+
+  dailyRatePerSec: BigInt!
+
+  dailyBaseTokenTVL : BigInt!
+
+  dailyLpToken : BigInt!
+}
+
+type VaultData @entity{
+  id: ID!
+
+  block: BigInt
+
+  lpTokenUSD:BigInt
+
+  baseTokenAddress:String
+
+  address: String
+
+  transactionHash: String!
+
+  time:BigInt!
+
+  share: BigInt
+
+  loan: BigInt!
+
+  lpToken: BigInt!
+
+  ratePerSec:BigInt!
+}
+
+type LendData @entity{
+  id: ID!
+
+  address:String!
+
+  block: BigInt
+
+  transactionHash: Bytes
+
+  from: Bytes!
+
+  to : Bytes!
+
+  value : BigInt!
+
+  baseAmount : BigInt !
+}
+
+type LendDayData @entity{
+  id : ID!
+
+  date: BigInt
+
+  dailyValue: BigInt
+
+  dailyBaseAmount: BigInt
+}
+
+type KillData @entity{
+  id : ID!
+
+  block: BigInt
+
+  transactionHash: Bytes
+
+  Killer : Bytes
+
+  owner : Bytes
+
+  posVal : BigInt
+
+  debt : BigInt
+
+  prize : BigInt
+
+  left : BigInt
+}
+
+type PriceUpdateData @entity{
+  id : ID!
+
+  token0: Bytes!
+
+  token1 : Bytes!
+
+  price : BigInt
+
+  timesTamp:BigInt!
+}
+
+type PositionData @entity{
+  id : ID!
+
+  worker : String!
+
+  owner : String!
+
+#  time: BigInt!
+
+  lpToken : BigInt!
+
+  debtVal : BigInt!
+}
+
+type TotalPositionValue @entity{
+  id : ID!
+
+#  time : BigInt!
+
+  totalPositionValue : BigInt!
+}
+#type ValueLock @entity{
+#  id : ID!
+#
+#  block: BigInt
+#
+#  transactionHash: Bytes
+#
+#  date: BigInt!
+#
+#  dailyValueLock : BigInt
+#
+#}
