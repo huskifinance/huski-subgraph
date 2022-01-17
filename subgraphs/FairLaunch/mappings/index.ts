@@ -125,11 +125,11 @@ export function fetchPoolInfo(address:Address,pid:BigInt):void{
         if (poolInfos === null){
             poolInfos = new PoolInfoDtat(pid.toString())
         }
-        poolInfos.stakeToken = poolInfo.value.value0
-        poolInfos.allocPoint = poolInfo.value.value1
-        poolInfos.lastRewardBlock = poolInfo.value.value2
-        poolInfos.accAlpacaPerShare = poolInfo.value.value3
-        poolInfos.accAlpacaPerShareTilBonusEnd = poolInfo.value.value4
+        poolInfos.stakeToken = poolInfo.value.value1
+        poolInfos.allocPoint = poolInfo.value.value2
+        poolInfos.lastRewardBlock = poolInfo.value.value3
+        poolInfos.accHuskiPerShare = poolInfo.value.value4
+        poolInfos.accHuskiPerShareTilBonusEnd = poolInfo.value.value5
         poolInfos.save()
     }
 

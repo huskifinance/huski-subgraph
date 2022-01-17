@@ -1,6 +1,6 @@
 specVersion: 0.0.2
 description: Gravatar for Ethereum
-repository: https://github.com/alpaca-finance/bsc-alpaca-contract.git
+repository: git@github.com:huskifinance/huski-bsc-contract.git
 schema:
   file: ./schema.graphql
 dataSources:

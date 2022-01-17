@@ -8,11 +8,11 @@ import {
     VaultData,
     VaultDayData
 } from "../generated/schema";
-import {Work, Transfer, Kill, Vault} from "../generated/Vault/Vault";
-import {PancakeswapV2Worker} from "../generated/Vault/PancakeswapV2Worker";
+import {Work, Transfer, Kill, Vault} from "../generated/Vault-ibBNB/Vault";
+import {PancakeswapV2Worker} from "../generated/Vault-ibBNB/PancakeswapV2Worker";
 
-import { ERC20 } from "../generated/Vault/ERC20";
-import { IVaultConfig } from "../generated/Vault/IVaultConfig";
+import { ERC20 } from "../generated/Vault-ibBNB/ERC20";
+import { IVaultConfig } from "../generated/Vault-ibBNB/IVaultConfig";
 
 export function handleWork(event: Work): void{
     let WorkID = event.transaction.hash.toHex()

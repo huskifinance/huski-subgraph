@@ -55,9 +55,9 @@ type StakeDepositDayData @entity{
 
   lastRewardBlock : BigInt!
 
-  accAlpacaPerShare : BigInt!
+  accHuskiPerShare : BigInt!
 
-  accAlpacaPerShareTilBonusEnd : BigInt!
+  accHuskiPerShareTilBonusEnd : BigInt!
 }
 
 type StakeWithdrawDayData @entity{
@@ -89,7 +89,7 @@ type PoolInfoDtat @entity{
 
   lastRewardBlock : BigInt
 
-  accAlpacaPerShare : BigInt
+  accHuskiPerShare : BigInt
 
-  accAlpacaPerShareTilBonusEnd : BigInt!
+  accHuskiPerShareTilBonusEnd : BigInt!
 }

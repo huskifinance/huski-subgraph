@@ -2,8 +2,8 @@
   {
     "inputs": [
       {
-        "internalType": "contract AlpacaToken",
-        "name": "_alpaca",
+        "internalType": "contract HuskyToken",
+        "name": "_husky",
         "type": "address"
       },
       {
@@ -13,7 +13,7 @@
       },
       {
         "internalType": "uint256",
-        "name": "_alpacaPerBlock",
+        "name": "_huskyPerBlock",
         "type": "uint256"
       },
       {
@@ -132,6 +132,11 @@
   {
     "inputs": [
       {
+        "internalType": "string",
+        "name": "_symbol",
+        "type": "string"
+      },
+      {
         "internalType": "uint256",
         "name": "_allocPoint",
         "type": "uint256"
@@ -150,32 +155,6 @@
     "name": "addPool",
     "outputs": [],
     "stateMutability": "nonpayable",
-    "type": "function"
-  },
-  {
-    "inputs": [],
-    "name": "alpaca",
-    "outputs": [
-      {
-        "internalType": "contract AlpacaToken",
-        "name": "",
-        "type": "address"
-      }
-    ],
-    "stateMutability": "view",
-    "type": "function"
-  },
-  {
-    "inputs": [],
-    "name": "alpacaPerBlock",
-    "outputs": [
-      {
-        "internalType": "uint256",
-        "name": "",
-        "type": "uint256"
-      }
-    ],
-    "stateMutability": "view",
     "type": "function"
   },
   {
@@ -343,6 +322,32 @@
     "type": "function"
   },
   {
+    "inputs": [],
+    "name": "husky",
+    "outputs": [
+      {
+        "internalType": "contract HuskyToken",
+        "name": "",
+        "type": "address"
+      }
+    ],
+    "stateMutability": "view",
+    "type": "function"
+  },
+  {
+    "inputs": [],
+    "name": "huskyPerBlock",
+    "outputs": [
+      {
+        "internalType": "uint256",
+        "name": "",
+        "type": "uint256"
+      }
+    ],
+    "stateMutability": "view",
+    "type": "function"
+  },
+  {
     "inputs": [
       {
         "internalType": "address",
@@ -430,7 +435,7 @@
         "type": "address"
       }
     ],
-    "name": "pendingAlpaca",
+    "name": "pendingHusky",
     "outputs": [
       {
         "internalType": "uint256",
@@ -452,6 +457,11 @@
     "name": "poolInfo",
     "outputs": [
       {
+        "internalType": "string",
+        "name": "symbol",
+        "type": "string"
+      },
+      {
         "internalType": "address",
         "name": "stakeToken",
         "type": "address"
@@ -468,12 +478,12 @@
       },
       {
         "internalType": "uint256",
-        "name": "accAlpacaPerShare",
+        "name": "accHuskyPerShare",
         "type": "uint256"
       },
       {
         "internalType": "uint256",
-        "name": "accAlpacaPerShareTilBonusEnd",
+        "name": "accHuskyPerShareTilBonusEnd",
         "type": "uint256"
       }
     ],
@@ -496,19 +506,6 @@
   {
     "inputs": [],
     "name": "renounceOwnership",
-    "outputs": [],
-    "stateMutability": "nonpayable",
-    "type": "function"
-  },
-  {
-    "inputs": [
-      {
-        "internalType": "uint256",
-        "name": "_alpacaPerBlock",
-        "type": "uint256"
-      }
-    ],
-    "name": "setAlpacaPerBlock",
     "outputs": [],
     "stateMutability": "nonpayable",
     "type": "function"
@@ -576,6 +573,19 @@
       }
     ],
     "name": "setDev",
+    "outputs": [],
+    "stateMutability": "nonpayable",
+    "type": "function"
+  },
+  {
+    "inputs": [
+      {
+        "internalType": "uint256",
+        "name": "_huskyPerBlock",
+        "type": "uint256"
+      }
+    ],
+    "name": "setHuskyPerBlock",
     "outputs": [],
     "stateMutability": "nonpayable",
     "type": "function"
@@ -707,6 +717,11 @@
         "internalType": "address",
         "name": "fundedBy",
         "type": "address"
+      },
+      {
+        "internalType": "uint256",
+        "name": "lastClaimBlock",
+        "type": "uint256"
       }
     ],
     "stateMutability": "view",
