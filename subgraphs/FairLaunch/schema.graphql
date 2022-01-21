@@ -1,4 +1,4 @@
-type StakeDepositData @entity{
+type DepositData @entity{
   id : ID!
 
   block: BigInt
@@ -12,7 +12,7 @@ type StakeDepositData @entity{
   amount : BigInt!
 }
 
-type StakeWithdrawData @entity{
+type WithdrawData @entity{
   id : ID!
 
   block: BigInt
@@ -26,7 +26,7 @@ type StakeWithdrawData @entity{
   amount : BigInt!
 }
 
-type StakeEmergencyWithdrawData @entity{
+type EmergencyWithdrawData @entity{
   id : ID!
 
   block: BigInt
@@ -40,7 +40,7 @@ type StakeEmergencyWithdrawData @entity{
   amount : BigInt!
 }
 
-type StakeDepositDayData @entity{
+type DepositDayData @entity{
   id : ID!
 
   amount : BigInt
@@ -60,7 +60,7 @@ type StakeDepositDayData @entity{
   accHuskiPerShareTilBonusEnd : BigInt!
 }
 
-type StakeWithdrawDayData @entity{
+type WithdrawDayData @entity{
   id : ID!
 
   amount : BigInt
@@ -70,7 +70,7 @@ type StakeWithdrawDayData @entity{
   date : BigInt!
 }
 
-type StakeEmergencyWithdrawDayData @entity{
+type EmergencyWithdrawDayData @entity{
   id : ID!
 
   amount : BigInt

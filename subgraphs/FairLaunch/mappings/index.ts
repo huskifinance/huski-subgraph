@@ -2,135 +2,136 @@ import {Deposit, DepositCall, EmergencyWithdraw, FairLaunch, Withdraw} from "../
 import {
     // DepositCallData,
     PoolInfoDtat,
-    StakeDepositData,
-    StakeDepositDayData,
-    StakeEmergencyWithdrawData, StakeEmergencyWithdrawDayData,
-    StakeWithdrawData, StakeWithdrawDayData
+    DepositData,
+    DepositDayData,
+    EmergencyWithdrawData, EmergencyWithdrawDayData,
+    WithdrawData, WithdrawDayData
 } from "../generated/schema";
-import {Address, BigInt, ethereum} from "@graphprotocol/graph-ts";
+import {Address, BigInt} from "@graphprotocol/graph-ts";
 
 export function handleDeposit(event:Deposit):void{
-    let stakeDepositData = new StakeDepositData(event.transaction.hash.toHex())
-    stakeDepositData.block = event.block.number
-    stakeDepositData.transactionHash = event.transaction.hash
-    stakeDepositData.pid = event.params.pid
-    stakeDepositData.user = event.params.user
-    stakeDepositData.amount = event.params.amount
-    let stakeDepositDayData = updateDepositDay(event)
-    let amount = stakeDepositDayData.amount
+    let depositData = new DepositData(event.transaction.hash.toHex())
+    depositData.block = event.block.number
+    depositData.transactionHash = event.transaction.hash
+    depositData.pid = event.params.pid
+    depositData.user = event.params.user
+    depositData.amount = event.params.amount
+    let depositDayData = updateDepositDayData(event)
+    let amount = depositDayData.amount
     if (amount !== null){
-        stakeDepositDayData.amount = amount.plus(event.params.amount)
+        depositDayData.amount = amount.plus(event.params.amount)
     }else {
-        stakeDepositDayData.amount = event.params.amount
+        depositDayData.amount = event.params.amount
     }
-    stakeDepositData.save()
-    stakeDepositDayData.save()
+    depositData.save()
+    depositDayData.save()
 }
 
 export function handleWithdraw(event:Withdraw):void{
-    let stakeWithdrawData = new StakeWithdrawData(event.transaction.hash.toHex())
-    stakeWithdrawData.block = event.block.number
-    stakeWithdrawData.transactionHash = event.transaction.hash
-    stakeWithdrawData.pid = event.params.pid
-    stakeWithdrawData.user = event.params.user
-    stakeWithdrawData.amount = event.params.amount
-    let stakeWithdrawDayData = updateWithdrawDay(event)
-    let amount = stakeWithdrawDayData.amount
+    let withdrawData = new WithdrawData(event.transaction.hash.toHex())
+    withdrawData.block = event.block.number
+    withdrawData.transactionHash = event.transaction.hash
+    withdrawData.pid = event.params.pid
+    withdrawData.user = event.params.user
+    withdrawData.amount = event.params.amount
+    let withdrawDayData = updateWithdrawDay(event)
+    let amount = withdrawDayData.amount
     if (amount !== null){
-        stakeWithdrawDayData.amount = amount.plus(event.params.amount)
+        withdrawDayData.amount = amount.plus(event.params.amount)
     }else {
-        stakeWithdrawDayData.amount = event.params.amount
+        withdrawDayData.amount = event.params.amount
     }
-    stakeWithdrawData.save()
-    stakeWithdrawDayData.save()
+    withdrawData.save()
+    withdrawDayData.save()
 }
 
 export function handleEmergencyWithdraw(event:EmergencyWithdraw):void{
-    let stakeEmergencyWithdrawData = new StakeEmergencyWithdrawData(event.transaction.hash.toHex())
-    stakeEmergencyWithdrawData.block = event.block.number
-    stakeEmergencyWithdrawData.transactionHash = event.transaction.hash
-    stakeEmergencyWithdrawData.pid = event.params.pid
-    stakeEmergencyWithdrawData.user = event.params.user
-    stakeEmergencyWithdrawData.amount = event.params.amount
-    let stakeEmergencyWithdrawDayData = updateEmergencyWithdrawDay(event)
-    let amount = stakeEmergencyWithdrawDayData.amount
+    let emergencyWithdrawData = new EmergencyWithdrawData(event.transaction.hash.toHex())
+    emergencyWithdrawData.block = event.block.number
+    emergencyWithdrawData.transactionHash = event.transaction.hash
+    emergencyWithdrawData.pid = event.params.pid
+    emergencyWithdrawData.user = event.params.user
+    emergencyWithdrawData.amount = event.params.amount
+    let emergencyWithdrawDayData = updateEmergencyWithdrawDay(event)
+    let amount = emergencyWithdrawDayData.amount
     if (amount !== null){
-        stakeEmergencyWithdrawDayData.amount = amount.plus(event.params.amount)
+        emergencyWithdrawDayData.amount = amount.plus(event.params.amount)
         fetchPoolInfo(event.address,event.params.pid)
     }else {
-        stakeEmergencyWithdrawDayData.amount = event.params.amount
+        emergencyWithdrawDayData.amount = event.params.amount
     }
-    stakeEmergencyWithdrawDayData.save()
-    stakeEmergencyWithdrawData.save()
+    emergencyWithdrawDayData.save()
+    emergencyWithdrawData.save()
 }
 
-export function updateDepositDay(event:Deposit):StakeDepositDayData{
+export function updateDepositDayData(event:Deposit):DepositDayData{
     let timestamp = event.block.timestamp.toI32();
     let dayID = timestamp / 86400;
     // let dayStartTimestamp = dayID * 86400;
     let pid = event.params.pid
     let ID = event.address.toHex().concat("-").concat(BigInt.fromI32(dayID).toString()).concat("-").concat(pid.toString());
 
-    let stakeDepositDayData = StakeDepositDayData.load(ID)
-    if (stakeDepositDayData === null){
-        stakeDepositDayData = new StakeDepositDayData(ID)
-        stakeDepositDayData.pid = pid
+    let depositDayData =DepositDayData.load(ID)
+    if (depositDayData === null){
+        depositDayData = new DepositDayData(ID)
+        depositDayData.pid = pid
         fetchPoolInfo(event.address,pid)
-        stakeDepositDayData.date =  BigInt.fromI32(timestamp)
+        depositDayData.date =  BigInt.fromI32(timestamp)
     }
-    stakeDepositDayData.save()
-    return stakeDepositDayData as StakeDepositDayData
+    depositDayData.save()
+    return depositDayData as DepositDayData
 }
 
-export function updateWithdrawDay(event:Withdraw):StakeWithdrawDayData{
+export function updateWithdrawDay(event:Withdraw):WithdrawDayData{
     let timestamp = event.block.timestamp.toI32();
     let dayID = timestamp / 86400;
     // let dayStartTimestamp = dayID * 86400;
     let pid = event.params.pid
     let ID = event.address.toHex().concat("-").concat(BigInt.fromI32(dayID).toString()).concat("-").concat(pid.toString());
 
-    let stakeWithdrawDayData = StakeWithdrawDayData.load(ID)
-    if (stakeWithdrawDayData === null){
-        stakeWithdrawDayData = new StakeWithdrawDayData(ID)
-        stakeWithdrawDayData.pid = pid
+    let withdrawDayData = WithdrawDayData.load(ID)
+    if (withdrawDayData === null){
+        withdrawDayData = new WithdrawDayData(ID)
+        withdrawDayData.pid = pid
         fetchPoolInfo(event.address,pid)
-        stakeWithdrawDayData.date = BigInt.fromI32(timestamp)
+        withdrawDayData.date = BigInt.fromI32(timestamp)
     }
-    stakeWithdrawDayData.save()
-    return stakeWithdrawDayData as StakeWithdrawDayData
+    withdrawDayData.save()
+    return withdrawDayData as WithdrawDayData
 }
 
-export function updateEmergencyWithdrawDay(event:EmergencyWithdraw):StakeEmergencyWithdrawDayData{
+export function updateEmergencyWithdrawDay(event:EmergencyWithdraw):EmergencyWithdrawDayData{
     let timestamp = event.block.timestamp.toI32();
     let dayID = timestamp / 86400;
     // let dayStartTimestamp = dayID * 86400;
     let pid = event.params.pid
     let ID = event.address.toHex().concat("-").concat(BigInt.fromI32(dayID).toString()).concat("-").concat(pid.toString());
-    let stakeEmergencyWithdrawDayData = StakeEmergencyWithdrawDayData.load(ID)
-    if(stakeEmergencyWithdrawDayData === null){
-        stakeEmergencyWithdrawDayData = new StakeEmergencyWithdrawDayData(ID)
-        stakeEmergencyWithdrawDayData.pid = pid
+    let emergencyWithdrawDayData = EmergencyWithdrawDayData.load(ID)
+    if(emergencyWithdrawDayData === null){
+        emergencyWithdrawDayData = new EmergencyWithdrawDayData(ID)
+        emergencyWithdrawDayData.pid = pid
         fetchPoolInfo(event.address,pid)
-        stakeEmergencyWithdrawDayData.date = BigInt.fromI32(timestamp)
+        emergencyWithdrawDayData.date = BigInt.fromI32(timestamp)
     }
-    stakeEmergencyWithdrawDayData.save()
-    return stakeEmergencyWithdrawDayData as StakeEmergencyWithdrawDayData
+    emergencyWithdrawDayData.save()
+    return emergencyWithdrawDayData as EmergencyWithdrawDayData
 }
-//调用合约方法查询PoolInfo
+
 export function fetchPoolInfo(address:Address,pid:BigInt):void{
     let fairLaunch = FairLaunch.bind(address)
     let poolInfo = fairLaunch.try_poolInfo(pid)
-    if (!poolInfo.reverted){
-        let poolInfos = PoolInfoDtat.load(pid.toString())
-        if (poolInfos === null){
-            poolInfos = new PoolInfoDtat(pid.toString())
-        }
-        poolInfos.stakeToken = poolInfo.value.value1
-        poolInfos.allocPoint = poolInfo.value.value2
-        poolInfos.lastRewardBlock = poolInfo.value.value3
-        poolInfos.accHuskiPerShare = poolInfo.value.value4
-        poolInfos.accHuskiPerShareTilBonusEnd = poolInfo.value.value5
-        poolInfos.save()
+    if (poolInfo.reverted){
+        return
     }
 
+    let poolInfos = PoolInfoDtat.load(pid.toString())
+    if (poolInfos === null){
+        poolInfos = new PoolInfoDtat(pid.toString())
+    }
+    poolInfos.stakeToken = poolInfo.value.value1
+    poolInfos.allocPoint = poolInfo.value.value2
+    poolInfos.lastRewardBlock = poolInfo.value.value3
+    poolInfos.accHuskiPerShare = poolInfo.value.value4
+    poolInfos.accHuskiPerShareTilBonusEnd = poolInfo.value.value5
+    poolInfos.save()
 }

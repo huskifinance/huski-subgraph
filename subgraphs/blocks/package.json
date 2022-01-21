@@ -1,0 +1,13 @@
+{
+  "name": "blocks",
+  "description": "HuskiFinance Subgraph",
+  "version": "1.0.0",
+  "repository": "git@github.com:huskifinance/huski-subgraph.git",
+  "author": "HuskiFinance",
+  "scripts": {
+    "codegen": "graph codegen subgraph.yaml",
+    "build": "graph build subgraph.yaml",
+    "create": "graph create --node http://127.0.0.1:8020 huskifinance/blocks",
+    "deploy": "graph deploy --product hosted-service --node http://127.0.0.1:8020 --ipfs http://127.0.0.1:5001 huskifinance/blocks subgraph.yaml"
+  }
+}

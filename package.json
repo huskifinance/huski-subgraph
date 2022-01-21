@@ -17,8 +17,6 @@
     "prepare": "huski install"
   },
   "devDependencies": {
-    "matchstick-as": "git://github.com/LimeChain/matchstick-as.git",
-    "keytar": "^7.4.0",
     "@commitlint/cli": "^13.1.0",
     "@commitlint/config-conventional": "^13.1.0",
     "@graphprotocol/graph-cli": "^0.22.1",

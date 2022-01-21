@@ -1,59 +1,81 @@
 type VaultDayData @entity{
   id: ID!
 
-  baseTokenAddress:String!
+  baseTokenAddress :String!
 
-  date: BigInt
+  date: BigInt!
 
-  dailyLoan: BigInt
+  debt: BigInt
 
-  dailyRatePerSec: BigInt!
+  loan: BigInt
 
-  dailyBaseTokenTVL : BigInt!
+  ratePerSec: BigInt!
 
-  dailyLpToken : BigInt!
+  baseTokenTVL : BigInt!
+
+  baseTokenAmount : BigInt!
 }
 
-type VaultData @entity{
+type PositionData @entity{
   id: ID!
+
+  positionId:BigInt!
 
   block: BigInt
 
-  lpTokenUSD:BigInt
-
   baseTokenAddress:String
 
-  address: String
+  vaultAddress: String
 
   transactionHash: String!
 
   time:BigInt!
 
-  share: BigInt
+  debt: BigInt
 
   loan: BigInt!
 
-  lpToken: BigInt!
+  baseTokenAmount: BigInt!
 
   ratePerSec:BigInt!
+
+  killTime:BigInt
 }
 
-type LendData @entity{
+type DepositData @entity{
   id: ID!
 
-  address:String!
+  vaultAddress:String!
+
+  time:BigInt!
 
   block: BigInt
 
   transactionHash: Bytes
 
-  from: Bytes!
+  depositAccount : Bytes!
 
-  to : Bytes!
+#  depositShare : BigInt!
 
-  value : BigInt!
+  depositAmount : BigInt !
+}
 
-  baseAmount : BigInt !
+type WithdrawData @entity{
+  id: ID!
+
+  vaultAddress:String!
+
+  time:BigInt!
+
+  block: BigInt
+
+  transactionHash: Bytes
+
+  withdrawAccount: Bytes!
+
+#  withdrawShare : BigInt!
+
+  withdrawAmount : BigInt !
 }
 
 type KillData @entity{
@@ -63,7 +85,7 @@ type KillData @entity{
 
   transactionHash: Bytes
 
-  Killer : Bytes
+  killer : Bytes
 
   owner : Bytes
 
@@ -76,33 +98,25 @@ type KillData @entity{
   left : BigInt
 }
 
-type PriceUpdateData @entity{
+#type PriceUpdateData @entity{
+#  id : ID!
+#
+#  token0: Bytes!
+#
+#  token1 : Bytes!
+#
+#  price : BigInt
+#
+#  timesTamp:BigInt!
+#}
+
+type PositionDayData @entity{
   id : ID!
 
-  token0: Bytes!
+  date:BigInt!
 
-  token1 : Bytes!
-
-  price : BigInt
-
-  timesTamp:BigInt!
+  positionTotalAmount: BigInt!
 }
 
-type PositionData @entity{
-  id : ID!
 
-  worker : String!
-
-  owner : String!
-
-  lpToken : BigInt!
-
-  debtVal : BigInt!
-}
-
-type TotalPositionValue @entity{
-  id : ID!
-
-  totalPositionValue : BigInt!
-}
 

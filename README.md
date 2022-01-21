@@ -27,6 +27,4 @@ For any of the subgraph: `blocks` as `[subgraph]`
 
 3. Run the `yarn build` command to build the subgraph, and check compilation errors before deploying.
 
-4. Run `graph auth --product hosted-service '<ACCESS_TOKEN>'`
-
-5. Deploy via `yarn deploy`.
+4. Deploy via `yarn deploy`.
